@@ -124,20 +124,22 @@
                     (not (inside ?obj1 ?obj2)))
     )
 
-
-
-
-
-
-
-
-
     (:action slice
         :parameters (?obj - object ?agent - agent.n.01 ?knife - knife.n.01)
         :precondition (and (holding ?knife) 
                             (nextto ?obj ?agent))
         :effect (sliced ?obj)
     )
+
+    (:action slice-carvingknife
+        :parameters (?obj - object ?knife - carving_knife.n.01 ?board - countertop.n.01 ?agent - agent.n.01)
+        :precondition (and (nextto ?obj ?agent)
+                           (holding ?knife)
+                           (ontop ?obj ?board)
+                           (not (sliced ?obj)))
+        :effect (sliced ?obj)
+    )
+
 
     (:action place_onfloor
         :parameters (?floor - floor.n.01 ?agent - agent.n.01 ?obj1 - object)
@@ -301,6 +303,19 @@
         :effect (not (dusty ?obj))
     )
 
+    (:action freeze
+        :parameters (?obj - object ?fridge - electric_refrigerator.n.01)
+        :precondition (and (inside ?obj ?fridge)
+                           (not (frozen ?obj)))
+        :effect (frozen ?obj)
+    )
+
+    (:action cook
+        :parameters (?obj - object ?pan - pan.n.01)
+        :precondition (and (ontop ?obj ?pan)
+                           (not (cooked ?obj)))
+        :effect (cooked ?obj)
+    )
 
 )
 
