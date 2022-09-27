@@ -213,6 +213,14 @@
         :effect (not (stained ?obj))
     )
 
+    (:action clean-stained-dishwasher ; this should be a plan where objects are put in and then dishwasher is closed and toggled-on
+        :parameters (?dishwasher - dishwasher.n.01 ?obj - object ?agent - agent.n.01)
+        :precondition (and (holding ?obj)
+                            (open ?dishwasher)
+                            (nextto ?dishwasher ?agent))
+        :effect (not (stained ?obj))
+    )
+
     (:action clean-rag
         :parameters (?rag - rag.n.01 ?obj - object ?agent - agent.n.01)
         :precondition (and (nextto ?obj ?agent) 
